@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexXsolve - Advanced Word Game Platform</title>
+    <meta name="description" content="AI-powered Wordle solver, interactive word games, and advanced word search tools. Master Wordle with neural network assistance.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .logo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Launch Button */
+        .launch-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .launch-btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 20px 60px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.5);
+            background: #ff5252;
+        }
+
+        .launch-note {
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .feature-list li {
+            color: #555;
+            padding: 5px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        /* Screenshot Preview */
+        .preview-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .preview-section h2 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .preview-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .preview-item h4 {
+            color: #333;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .tagline {
+                font-size: 1.1em;
+            }
+
+            .launch-btn {
+                padding: 15px 40px;
+                font-size: 1.2em;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-container {
+                padding: 20px;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="images/LexXsolve_logo.png" alt="LexXsolve Logo" class="logo">
+            </div>
+            <h1>LexXsolve Word Games</h1>
+            <p class="tagline">Master Wordle with AI-Powered Tools & Interactive Gameplay</p>
+        </header>
+
+        <div class="launch-section">
+            <a href="https://lexsolve.streamlit.app" class="launch-btn">
+                🚀 Launch App
+            </a>
+            <p class="launch-note">First load takes ~30 seconds • Instant after that</p>
+        </div>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Word Solver</h3>
+                <p>Get AI-powered assistance for Wordle puzzles using advanced neural networks trained on thousands of games.</p>
+                <ul class="feature-list">
+                    <li>90%+ accuracy in word suggestions</li>
+                    <li>Smart constraint management</li>
+                    <li>Multiple word lengths (4-7 letters)</li>
+                    <li>Real-time AI recommendations</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>Word Player</h3>
+                <p>Play interactive Wordle games with instant feedback, multi-board support, and customizable difficulty.</p>
+                <ul class="feature-list">
+                    <li>Single & multi-board gameplay</li>
+                    <li>Custom word lengths</li>
+                    <li>Intelligent hint system</li>
+                    <li>Track your progress</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Word Finder</h3>
+                <p>Advanced word search and analysis tools with comprehensive dictionary integration.</p>
+                <ul class="feature-list">
+                    <li>Pattern matching</li>
+                    <li>Letter frequency analysis</li>
+                    <li>Definition lookup</li>
+                    <li>Spelling Bee solver</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="preview-section">
+            <h2>Powerful Features</h2>
+            <div class="preview-grid">
+                <div class="preview-item">
+                    <div style="font-size: 3em;">🤖</div>
+                    <h4>Neural Network AI</h4>
+                    <p>Trained on hundreds of thousands of simulated games</p>
+                </div>
+                <div class="preview-item">
+                    <div style="font-size: 3em;">📊</div>
+                    <h4>Smart Analytics</h4>
+                    <p>Frequency analysis and probability scoring</p>
+                </div>
+                <div class="preview-item">
+                    <div style="font-size: 3em;">⚡</div>
+                    <h4>Instant Results</h4>
+                    <p>Lightning-fast word suggestions and validation</p>
+                </div>
+                <div class="preview-item">
+                    <div style="font-size: 3em;">📱</div>
+                    <h4>Mobile Optimized</h4>
+                    <p>Works perfectly on all devices</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="launch-section">
+            <a href="https://lexsolve.streamlit.app" class="launch-btn">
+                Start Playing Now →
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Built with ❤️ using Python, Streamlit & PyTorch</p>
+        <p style="margin-top: 10px;">
+            <a href="https://github.com/yourusername/lexsolve" target="_blank">GitHub</a> • 
+            <a href="mailto:contact@mywordlesolver.com">Contact</a>
+        </p>
+    </footer>
+</body>
+</html>
